@@ -6,6 +6,7 @@ Our pipeline can improve species-level segmentation of crops and weeds in agricu
 
 ## Dataset
 This project makes use of the `WE3DS dataset` (Weed, Crop, and Soil Dataset) for training and evaluation purposes. The WE3DS dataset provides annotated RGB-D images for semantic segmentation in agricultural scenes.
+
 **Reference**:  
 Kitzler, F.; Barta, N.; Neugschwandtner, R.W.; Gronauer, A.; Motsch, V.  
 **WE3DS: An RGB-D Image Dataset for Semantic Segmentation in Agriculture**.  
