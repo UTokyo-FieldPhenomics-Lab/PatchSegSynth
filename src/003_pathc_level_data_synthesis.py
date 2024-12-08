@@ -10,15 +10,6 @@ from configuration import synthetic_fore_crop, synthetic_fore_weed, synthetic_ba
 from configuration import class_names
 
 
-# set the synthetic data output folder here.
-output_dir = f"{SYNTHETIC_PATH}/synthetic_patch_5x"
-mask_output_dir = os.path.join(output_dir, "annotations")
-image_output_dir = os.path.join(output_dir, "images")
-
-os.makedirs(output_dir, exist_ok=True)
-os.makedirs(mask_output_dir, exist_ok=True)
-os.makedirs(image_output_dir, exist_ok=True)
-
 class_indices = {name: i for i, name in enumerate(class_names)}
 
 def get_random_image(folder):
@@ -95,7 +86,17 @@ def generate_scenes(num_scenes):
         list(tqdm(executor.map(create_synthetic_scene, range(num_scenes)), total=num_scenes))
             
 if __name__ == "__main__":
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Generate synthetic patch-level data.")
+    parser.add_argument("-x", type=int, default=1, help="Multiplier for the number of synthetic scenes.")
+    args = parser.parse_args()
+
+    # 设置生成的倍数和输出目录
+    multiplier = args.x
+    output_dir = f"{SYNTHETIC_PATH}/synthetic_patch_{multiplier}x"
+    num_scenes = 1540 * multiplier
+
+    print(f"Generating {num_scenes} synthetic scenes in '{output_dir}'...")
     random.seed(42)
     np.random.seed(42)
-
-    generate_scenes(1540 * 1)
